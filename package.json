@@ -1,0 +1,29 @@
+{
+  "name": "book-n-borrow",
+  "version": "1.0.0",
+  "description": "Airbnb for books",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joaqsala/group2-proj2.git"
+  },
+  "author": "Joaquin Salazar",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/joaqsala/group2-proj2/issues"
+  },
+  "homepage": "https://github.com/joaqsala/group2-proj2#readme",
+  "dependencies": {
+    "bcrypt": "^5.1.0",
+    "connect-session-sequelize": "^7.1.6",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "express-handlebars": "^7.0.7",
+    "express-session": "^1.17.3",
+    "mysql2": "^3.3.1",
+    "sequelize": "^6.31.1"
+  }
+}
