@@ -24,7 +24,7 @@ Book.init(
       allowNull: true,
     },
     isbn: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
       allowNull: false,
       unique: true,
     },
@@ -53,7 +53,7 @@ Book.init(
     sequelize,
     timestamps: false,
     freezeTableName: true,
-    underscored: true,
+    underscored: false,
     modelName: 'book',
   }
 );

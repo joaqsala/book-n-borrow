@@ -33,8 +33,8 @@ Renter.init(
     timestamps: false,
     freezeTableName: true,
     underscored: true,
-    modelName: 'book',
+    modelName: 'renter',
   }
 );
 
-module.exports = Book;
+module.exports = Renter;

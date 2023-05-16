@@ -1,5 +1,6 @@
 const User = require('./User');
 const Book = require('./Book');
+const Renter = require('./Renter');
 
 //ownership
 User.hasMany(Book, {
@@ -12,7 +13,7 @@ Book.belongsTo(User, {
     });
 
 //rental
-User.hasMany(Book, {
+User.belongsToMany(Book, {
     through: Renter 
     });
 
@@ -21,4 +22,4 @@ Book.belongsTo(User, {
     });
 
 
-module.exports = { User, Book };
+module.exports = { User, Book, Renter }
