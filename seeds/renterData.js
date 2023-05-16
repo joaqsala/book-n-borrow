@@ -17,3 +17,4 @@ await Renter.bulkCreate(renterdata, {
 
 
 module.exports = {seedRenter};
+
