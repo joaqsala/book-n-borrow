@@ -14,11 +14,13 @@ Book.belongsTo(User, {
 
 //rental
 User.belongsToMany(Book, {
-    through: Renter 
+    through: Renter, 
+    foreignKey: 'renter_id',
     });
 
 Book.belongsTo(User, {
-    through: Renter 
+    through: Renter,
+    foreignKey: 'book_id',
     });
 
 
