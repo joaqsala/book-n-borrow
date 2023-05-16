@@ -12,7 +12,18 @@
 
 .fa-magnifying-glass {
     color: black;
-    font-size: 70px;
+    font-size: 75px;
+}
+
+.homepage-buttons {
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+.icon-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .renter-text {
