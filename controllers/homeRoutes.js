@@ -1,8 +1,9 @@
 const router = require('express').Router();
-const { User, Book } = require('../models');
+const { User, Book, Renter } = require('../models');
 const withAuth = require('../utils/auth');
 //withAuth is only used in the front end not the backend api routes
 
+ // Get all books
 router.get('/', async (req, res) => {
   try {
     const bookData = await Book.findAll({
@@ -10,8 +11,10 @@ router.get('/', async (req, res) => {
       order: [['bookName', 'ASC']],
     });
 
+    // Serialize data so the template can read it
     const books = bookData.map((book) => book.get({ plain: true }));
     console.log(books);
+    // Pass serialized data and session flag into template
     res.render('/homepage', {
       books,
       logged_in: req.session.logged_in,
@@ -39,8 +42,46 @@ router.get('/book/:id', async (req, res) => {
   }
 });
 
+//route once user is logged in to see what they're renting & have on rent
 // Use withAuth middleware to prevent access to route
-router.get('/profile/:id', async (req, res) => {
+router.get('/profile', withAuth, async (req, res) => {
+  try {
+    // Find the logged in user based on the session ID
+    const userData = await User.findByPk(req.session.user_id, {
+      attributes: { exclude: ['password'] },
+      include: [ 
+        { 
+          model: Book, 
+          attributes: { exclude: ['owner_id'] }
+        },
+      ]
+    });
+    const renterData = await User.findByPk(req.session.user_id, {
+      attributes: [
+        {
+          model: Renter, 
+          attributes: ['book_id'],
+        },
+      ],
+    });
+
+    const user = userData.get({ plain: true });
+    console.log(user)
+    const renter = renterData.get({ plain: true });
+    console.log(renter)
+
+    res.render('profile', {
+      ...user,
+      ...renter,
+      logged_in: true
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+//this may need to move to userRoutes
+router.get('/addbook', withAuth, async (req, res) => {
   try {
     // Find the logged in user based on the session ID
     const userData = await User.findByPk(req.session.user_id, {
@@ -51,19 +92,28 @@ router.get('/profile/:id', async (req, res) => {
         },
       ],
     });
+    const renterData = await User.findByPk(req.session.user_id, {
+      attributes: [
+        {
+          model: Renter, 
+        },
+      ],
+    });
 
     const user = userData.get({ plain: true });
     console.log(user)
+    const renter = renterData.get({ plain: true });
+    console.log(renter)
 
     res.render('profile', {
       ...user,
+      ...renter,
       logged_in: true
     });
   } catch (err) {
     res.status(500).json(err);
   }
 });
-
 
 router.get('/login', (req, res) => {
   if (req.session.logged_in) {
