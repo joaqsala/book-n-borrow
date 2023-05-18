@@ -32,7 +32,11 @@ Book.init(
       type: DataTypes.DECIMAL(10, 2),
       allowNull: false,
     },
-    category: {
+    subject: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    course: {
       type: DataTypes.STRING,
       allowNull: false,
     },
