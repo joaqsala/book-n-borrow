@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Book } = require('../../models');
+const { Book, Renter } = require('../../models');
 const withAuth = require('../../utils/auth');
 
 
@@ -23,25 +23,34 @@ router.get('/', async (req, res) => {
     }
 });
 
+//adds a new book to db
+router.post('/loaner', withAuth, async (req, res) => {
+    try {
+    const newBook = await Book.create({
+        ...req.body,
+        user_id: req.session.user_id,
+    });
 
+    res.status(200).json(newBook);
+    } catch (err) {
+    res.status(400).json(err);
+    }
+});
 
-// router.delete('/:id', withAuth, async (req, res) => {
-//     try {
-//         const bookData = await Book.destroy({
-//         where: {
-//             id: req.params.id,
-//             user_id: req.session.user_id,
-//         },
-//         });
+ // books user has chosen to rent 
+router.post('/', withAuth, async (req, res) => {
+    try {
+        const rentData = await Renter.create({ 
+            book_id: req.params.id,
+            renter_id: req.session.user_id,
+    });
+    
+        res.status(200).json(rentData);
 
-//         if (!bookData) {
-//         res.status(404).json({ message: 'No book found with this id!' });
-//         return;
-//         }
-//         res.status(200).json(bookData);
-//     } catch (err) {
-//         res.status(500).json(err);
-//     }
-// });
+    } catch (err) {
+    res.status(500).json(err);
+    }
+});
+
 
 module.exports = router;
