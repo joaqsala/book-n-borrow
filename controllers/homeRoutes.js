@@ -24,6 +24,7 @@ router.get('/', async (req, res) => {
   }
 });
 
+//gets a book from the homescreen and displays
 router.get('/book/:id', async (req, res) => {
   try {
     const bookData = await Book.findByPk(req.params.id, {
@@ -42,85 +43,40 @@ router.get('/book/:id', async (req, res) => {
   }
 });
 
-//route once user is logged in to see what they're renting & have on rent
-// Use withAuth middleware to prevent access to route
-router.get('/profile', withAuth, async (req, res) => {
+//send user to posting page
+router.get('/loaner', async (req, res) => {
   try {
-    // Find the logged in user based on the session ID
-    const userData = await User.findByPk(req.session.user_id, {
-      attributes: { exclude: ['password'] },
-      include: [ 
-        { 
-          model: Book, 
-          attributes: { exclude: ['owner_id'] }
-        },
-      ]
-    });
-    const renterData = await User.findByPk(req.session.user_id, {
-      attributes: [
-        {
-          model: Renter, 
-          attributes: ['book_id'],
-        },
-      ],
-    });
-
-    const user = userData.get({ plain: true });
-    console.log(user)
-    const renter = renterData.get({ plain: true });
-    console.log(renter)
-
-    res.render('profile', {
-      ...user,
-      ...renter,
-      logged_in: true
-    });
+  res.render('loaner', {
+      logged_in: req.session.logged_in
+  });
   } catch (err) {
-    res.status(500).json(err);
+  res.status(500).json(err);
   }
 });
 
-//this may need to move to userRoutes
-router.get('/addbook', withAuth, async (req, res) => {
+//adds a new book to db
+router.post('/loaner', withAuth, async (req, res) => {
   try {
-    // Find the logged in user based on the session ID
-    const userData = await User.findByPk(req.session.user_id, {
-      attributes: [
-        {
-          model: Book, 
-          attributes: { exclude: ['owner_id'] },
-        },
-      ],
-    });
-    const renterData = await User.findByPk(req.session.user_id, {
-      attributes: [
-        {
-          model: Renter, 
-        },
-      ],
-    });
+  const newBook = await Book.create({
+      ...req.body,
+      user_id: req.session.user_id,
+  });
 
-    const user = userData.get({ plain: true });
-    console.log(user)
-    const renter = renterData.get({ plain: true });
-    console.log(renter)
-
-    res.render('profile', {
-      ...user,
-      ...renter,
-      logged_in: true
-    });
+  res.status(200).json(newBook);
   } catch (err) {
-    res.status(500).json(err);
+  res.status(400).json(err);
   }
 });
 
+
+// Login route
 router.get('/login', (req, res) => {
+// If the user is already logged in, redirect to the homepage
   if (req.session.logged_in) {
     res.redirect('/');
     return;
   }
-
+  // Otherwise, render the 'login' template
   res.render('login');
 });
 
