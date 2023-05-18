@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const { User, Book, Renter } = require('../models');
 const withAuth = require('../utils/auth');
-//withAuth is only used in the front end not the backend api routes
+
 
  // Get all books
 router.get('/', async (req, res) => {
@@ -15,7 +15,7 @@ router.get('/', async (req, res) => {
     const books = bookData.map((book) => book.get({ plain: true }));
     console.log(books);
     // Pass serialized data and session flag into template
-    res.render('/homepage', {
+    res.render('homepage', {
       books,
       logged_in: req.session.logged_in,
     });
@@ -35,7 +35,7 @@ router.get('/book/:id', async (req, res) => {
     console.log(book)
 
     res.render('onebook', {
-      ...book,
+      book,
       logged_in: req.session.logged_in
     });
   } catch (err) {

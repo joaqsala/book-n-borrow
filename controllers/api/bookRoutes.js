@@ -3,27 +3,27 @@ const { Book } = require('../../models');
 const withAuth = require('../../utils/auth');
 
 
+ // Get books using the field name (chosen by user in dropdown) and value 
+router.get('/', async (req, res) => {
+    try {
+        const { fieldName, newInfo } = req.body;
+
+        const bookData = await Book.findAll({
+        [fieldName] : newInfo
+    });
+        if (!bookData) {
+        res.status(404).json({ message: 'There are no books for the given search parameters.' });
+        return;
+        }
+    
+        res.status(200).json(bookData);
+
+    } catch (err) {
+    res.status(500).json(err);
+    }
+});
 
 
-// router.put('/:id', async (req, res) => {
-//     // update a book by its `id` value
-//     try {
-//     const bookData = await Book.update(req.body, {
-//         where: {
-//         id: req.params.id,
-//         },
-//     });
-
-//     if (!bookData) {
-//     res.status(404).json({ message: 'No book found with this id.' });
-//     return;
-//     }
-
-//     res.status(200).json(bookData);
-//     } catch (err) {
-//     res.status(500).json(err);
-//     }
-// });
 
 // router.delete('/:id', withAuth, async (req, res) => {
 //     try {
