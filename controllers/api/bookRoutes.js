@@ -4,7 +4,7 @@ const withAuth = require('../../utils/auth');
 
 
  // Get books using the field name (chosen by user in dropdown) and value 
-router.get('/search', async (req, res) => {
+router.post('/search', async (req, res) => {
     try {
         const { fieldName, newInfo } = req.body;
 
@@ -24,11 +24,11 @@ router.get('/search', async (req, res) => {
 });
 
 //adds a new book to db
-router.post('/loaner', withAuth, async (req, res) => {
+router.post('/', withAuth, async (req, res) => {
     try {
     const newBook = await Book.create({
         ...req.body,
-        user_id: req.session.user_id,
+        owner_id: req.session.user_id,
     });
 
     res.status(200).json(newBook);
@@ -38,7 +38,7 @@ router.post('/loaner', withAuth, async (req, res) => {
 });
 
  // books user has chosen to rent 
-router.post('/', withAuth, async (req, res) => {
+router.post('/rent', withAuth, async (req, res) => {
     try {
         const rentData = await Renter.create({ 
             book_id: req.params.id,
