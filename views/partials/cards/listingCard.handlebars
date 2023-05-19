@@ -1,13 +1,13 @@
-            {{!-- {{#each book}} --}}
+            {{#each books}}
         <div class="card-wrapper">
             <div class="card pb-3 ">
                 <img src="..." class="card-img-top" alt="...">
                 <div class="card-body">
-                    <h5 class="card-title">TITLE PLACEHOLDER
-                        {{this.title}}
+                    <h5 class="card-title">
+                        {{this.bookName}}
                     </h5>
-                    <p class="card-text"> DESCRIPTION PLACEHOLDER
-                        {{this.description}}
+                    <p class="card-text">
+                        {{this.author}}
                     </p>
                 </div>
                 <ul class="list-group list-group-flush">
@@ -21,4 +21,4 @@
                 </div>
             </div>
         </div>
-            {{!-- {{/each}} --}}
+            {{/each}}
