@@ -14,7 +14,9 @@
 }
 
 .searchbar{
-    transform: translateY(-60px);
+    padding-top: 20px;
+    padding-bottom: 20px;
+
 }
 
 
