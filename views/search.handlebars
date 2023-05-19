@@ -1,0 +1,101 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book'n Borrow</title>
+    <link rel="stylesheet" href="./style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/f44abfeecf.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div id="container">
+        <section class="open-book">
+            <div class="row justify-content-between">
+                <div class="col-4">
+                    <h1>Book'n Borrow</h1>
+                </div>
+                <div class="col-4">
+                    <h6>
+                        <ul class="nav justify-content-center">
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="#">Search</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Login</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">About Us</a>
+                            </li>
+                        </ul>
+                    </h6>
+                </div>
+            </div>
+            <!-- {{!-- main webpage content --}} -->
+            <div class="row justify-content-between">
+                <!-- {{!-- column left side --}} -->
+                <div class="col-5">
+                    <!-- search bar -->
+                    <div class="input-group mb-4">
+                        <input type="text" class="form-control" placeholder="Search Input">
+                        <button class="btn btn-primary" type="button" id="button-addon2">Search</button>
+                    </div>
+                    <!-- filters -->
+                    <h3>Search Filters:</h3>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="isbn-filter">
+                        <label class="form-check-label" for="isbn-filter">
+                        ISBN Search
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="subject-filter">
+                        <label class="form-check-label" for="subject-filter">
+                        Subject
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="title-filter">
+                        <label class="form-check-label" for="title-filter">
+                        Title
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="course-filter">
+                        <label class="form-check-label" for="course-filter">
+                        Course
+                        </label>
+                    </div>
+                </div>
+                <!-- {{!-- column right side --}} -->
+                <div class="col-5">
+                    <h3 id="listings">Listings:</h3>
+                    <!-- card listings -->
+                    <div class="card mb-3">
+                        <div class="row">
+                            <!-- book image -->
+                            <div class="col-md-4">
+                                <img src="..." class="img-fluid rounded-start" alt="...">
+                            </div>
+                            <!-- book description -->
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h5 class="card-title">Book title here</h5>
+                                    <p class="card-text">This is wider text designed for the long description of the book that we are adding and where info about the book should go.</p>
+                                    <p class="card-text"><small class="text-muted">Posted by: info here(?)</small></p>
+                                    <a href="#" class="btn btn-primary">View Book</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </section>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous">
+    </script>
+</body>
+</html>
