@@ -1,19 +1,22 @@
 const router = require('express').Router();
-const { User } = require('../models');
+const { User, Book, Renter } = require('../models');
 const withAuth = require('../utils/auth');
-//withAuth is only used in the front end not the backend api routes
 
-router.get('/', withAuth, async (req, res) => {
+
+ // Get all books
+router.get('/', async (req, res) => {
   try {
-    const userData = await User.findAll({
-      attributes: { exclude: ['password'] },
-      order: [['name', 'ASC']],
+    const bookData = await Book.findAll({
+      attributes: ['bookName', 'author', 'isbn', 'bookcoverURL'],
+      order: [['bookName', 'ASC']],
     });
 
-    const users = userData.map((project) => project.get({ plain: true }));
-
+    // Serialize data so the template can read it
+    const books = bookData.map((book) => book.get({ plain: true }));
+    console.log(books);
+    // Pass serialized data and session flag into template
     res.render('homepage', {
-      users,
+      books,
       logged_in: req.session.logged_in,
     });
   } catch (err) {
@@ -21,12 +24,46 @@ router.get('/', withAuth, async (req, res) => {
   }
 });
 
+//gets a book from the homescreen and displays
+router.get('/book/:id', async (req, res) => {
+  try {
+    const bookData = await Book.findByPk(req.params.id, {
+      attributes: { exclude: ['owner_id'] },
+    });
+
+    const book = bookData.get({ plain: true });
+    console.log(book)
+
+    res.render('onebook', {
+      book,
+      logged_in: req.session.logged_in
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+//send user to posting page
+router.get('/loaner', async (req, res) => {
+  try {
+  res.render('loaner', {
+      logged_in: req.session.logged_in
+  });
+  } catch (err) {
+  res.status(500).json(err);
+  }
+});
+
+
+
+// Login route
 router.get('/login', (req, res) => {
+// If the user is already logged in, redirect to the homepage
   if (req.session.logged_in) {
     res.redirect('/');
     return;
   }
-
+  // Otherwise, render the 'login' template
   res.render('login');
 });
 
