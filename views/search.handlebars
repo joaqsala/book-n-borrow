@@ -51,15 +51,9 @@
 {{> format/leftSideClose}}
     <!-- {{!-- column right side --}} -->
 {{> format/rightSideOpen}}
-    <div class="listing-section-wrapper ">
-        <h3 id="listings">Listings:</h3>
-        <div class="listing-section p-3 rounded">
-            {{> cards/listingCard}}
-            {{> cards/listingCard}}
-            {{> cards/listingCard}}
-        </div>
-
-        </div>
+{{> listingSection}}
 
 {{> format/rightSideClose}}
 {{> scripts/searchPageScript}}
+{{> scripts/searchbarScript}}
+
