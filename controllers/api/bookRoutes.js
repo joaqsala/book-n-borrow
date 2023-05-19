@@ -4,7 +4,7 @@ const withAuth = require('../../utils/auth');
 
 
  // Get books using the field name (chosen by user in dropdown) and value 
-router.get('/', async (req, res) => {
+router.get('/search', async (req, res) => {
     try {
         const { fieldName, newInfo } = req.body;
 
@@ -15,7 +15,7 @@ router.get('/', async (req, res) => {
         res.status(404).json({ message: 'There are no books for the given search parameters.' });
         return;
         }
-    
+        
         res.status(200).json(bookData);
 
     } catch (err) {
@@ -44,7 +44,6 @@ router.post('/', withAuth, async (req, res) => {
             book_id: req.params.id,
             renter_id: req.session.user_id,
     });
-    
         res.status(200).json(rentData);
 
     } catch (err) {
