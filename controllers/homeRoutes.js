@@ -7,7 +7,7 @@ const withAuth = require('../utils/auth');
 router.get('/', async (req, res) => {
   try {
     const bookData = await Book.findAll({
-      attributes: ['bookName', 'author', 'isbn', 'bookcoverURL'],
+      attributes: ['bookName', 'author', 'isbn', 'bookcoverURL', 'yearPublish', 'rentalPrice'],
       order: [['bookName', 'ASC']],
     });
 
