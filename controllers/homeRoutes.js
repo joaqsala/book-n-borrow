@@ -46,7 +46,7 @@ router.get('/book/:id', async (req, res) => {
 //send user to posting page
 router.get('/loaner', async (req, res) => {
   try {
-  res.render('loaner', {
+  res.render('newlisting', {
       logged_in: req.session.logged_in
   });
   } catch (err) {
@@ -54,6 +54,15 @@ router.get('/loaner', async (req, res) => {
   }
 });
 
+router.get('/search', async (req, res) => {
+  try {
+  res.render('search', {
+      logged_in: req.session.logged_in
+  });
+  } catch (err) {
+  res.status(500).json(err);
+  }
+});
 
 
 // Login route

@@ -4,6 +4,59 @@
     width: 100%;
 }
 
+.signup-section{
+    transform: translateX(100px);
+}
+
+.login-card{
+    padding-top: 20px;
+
+}
+
+.searchbar{
+    transform: translateY(-60px);
+}
+
+
+#email-login{
+    width: 50%;
+}
+
+
+
+#password-login{
+    width: 50%;
+}
+
+.listing-section-wrapper{
+    
+    transform: translateX(50px);
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+}
+
+.listing-section::-webkit-scrollbar {
+    display: none;
+}
+
+.card-wrapper{
+    padding-bottom: 10px;
+}
+
+.listing-section .card {
+    width: 100%;
+}
+
+.listing-section{
+    display: flex;
+    flex-direction: column;
+    height: 450px;
+    width: 150%;
+    background-color: rgba(128, 128, 128, 0.484);
+    overflow-y: auto;
+}
+
 .fa-dollar-sign {
     color: green;
     font-size: 75px;
@@ -68,5 +121,7 @@
         transform: translate(-50%,0);
         width: 4em;
         z-index: 1;
+        
     }
 }
+
