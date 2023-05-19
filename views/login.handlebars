@@ -1,38 +1,9 @@
 
-            <!-- {{!-- main webpage content --}} -->
-            <div class="row justify-content-between">
-                <!-- {{!-- column left side --}} -->
-                <div class="col-6">
-                    <h2>Login:</h2>
-                    <form>
-                        <!-- email -->
-                        <div class="row mb-3">
-                          <label for="inputEmail3" class="col-sm-2 col-form-label">Email:</label>
-                          <div class="col-sm-10">
-                            <input type="email" class="form-control" id="inputEmail3">
-                          </div>
-                        </div>
-                        <!-- password -->
-                        <div class="row mb-3">
-                          <label for="inputPassword3" class="col-sm-2 col-form-label">Password:</label>
-                          <div class="col-sm-10">
-                            <input type="password" class="form-control" id="inputPassword3">
-                          </div>
-                        </div>
-                        <!-- sumbit button -->
-                        <div class="gap-2 col-3 mx-auto">
-                            <button type="submit" class="btn btn-primary" id="login">Login</button>
-                        </div>
-                      </form>
-                </div>
+
+{{> format/leftSideOpen}}
+    {{> loginForm}}
+{{> format/leftSideClose}}
                 <!-- {{!-- column right side --}} -->
-                <div class="col-4 ">
-                    <h2>New User?</h2>
-                    <!-- sign up button -->
-                    <div>
-                        <button type="submit" class="btn btn-success" id="sign-up">Sign Up Here!</button>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </div>
+{{> format/rightSideOpen}}
+    {{> signupSection}}
+{{> format/rightSideClose}}
