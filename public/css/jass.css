@@ -12,6 +12,10 @@
     padding-top: 20px;
 
 }
+.card-link{
+    text-decoration: none;
+    color: inherit;
+}
 
 .searchbar{
     padding-top: 20px;

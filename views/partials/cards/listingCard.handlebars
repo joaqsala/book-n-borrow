@@ -1,7 +1,8 @@
             {{#each books}}
         <div class="card-wrapper">
+            <a href="" class = "card-link">
             <div class="card pb-3 ">
-                <img src="..." class="card-img-top" alt="...">
+                <img src="{{this.bookcoverURL}}" class="card-img-top" alt="...">
                 <div class="card-body">
                     <h5 class="card-title">
                         {{this.bookName}}
@@ -11,14 +12,14 @@
                     </p>
                 </div>
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item">An item</li>
-                    <li class="list-group-item">A second item</li>
-                    <li class="list-group-item">A third item</li>
+                    <li class="list-group-item">Year Published: {{this.yearPublish}}</li>
+                    <li class="list-group-item">ISBN: {{this.isbn}}</li>
+                    <li class="list-group-item">{{this.rentalPrice}}</li>
                 </ul>
                 <div class="card-body">
-                    <a href="#" class="card-link">Card link</a>
-                    <a href="#" class="card-link">Another link</a>
+                    <a href="" class="btn btn-primary">Rent Now</a>
                 </div>
             </div>
+            </a>
         </div>
             {{/each}}
