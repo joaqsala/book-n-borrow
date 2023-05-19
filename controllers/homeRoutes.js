@@ -24,7 +24,7 @@ router.get('/', async (req, res) => {
   }
 });
 
-//gets a book from the homescreen and displays
+//Get a book from the homescreen to display on a card
 router.get('/book/:id', async (req, res) => {
   try {
     const bookData = await Book.findByPk(req.params.id, {
@@ -43,7 +43,7 @@ router.get('/book/:id', async (req, res) => {
   }
 });
 
-//send user to posting page
+//Send user to posting page
 router.get('/loaner', async (req, res) => {
   try {
   res.render('newlisting', {
@@ -54,6 +54,7 @@ router.get('/loaner', async (req, res) => {
   }
 });
 
+//Send user to search page
 router.get('/search', async (req, res) => {
   try {
   res.render('search', {
@@ -64,6 +65,16 @@ router.get('/search', async (req, res) => {
   }
 });
 
+// Sign-up route
+router.get('/signup', (req, res) => {
+  // If the user is already logged in, redirect to the homepage
+    if (req.session.logged_in) {
+      res.redirect('/');
+      return;
+    }
+    // Otherwise, render the 'login' template
+    res.render('signup');
+  });
 
 // Login route
 router.get('/login', (req, res) => {
