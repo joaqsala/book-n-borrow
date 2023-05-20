@@ -1,44 +1,13 @@
-
-
-
-            <!-- {{!-- main webpage content --}} -->
-            <div class="row justify-content-between">
-                <!-- {{!-- column left side --}} -->
-                <div class="col-6">
-                    <!-- book image -->
-                    <div class="text-center">
-                        <img src="..." class="rounded" alt="book posting image here">
-                    </div>
-                </div>
+<!-- {{!-- main webpage content --}} -->
+{{> format/leftSideOpen}}
+                    <h3>Create New Listing:</h3>
+{{> forms/newListingForm}}
+{{> format/leftSideClose}}
                 <!-- {{!-- column right side --}} -->
-                <div class="col-5">
-                    <!-- results info -->
-                    <ul class="list-group list-group-horizontal">
-                        <li class="list-group-item flex-fill"><strong>Title:</strong></li>
-                        <li class="list-group-item flex-fill">Book title</li>
-                    </ul>
-                    <ul class="list-group list-group-horizontal">
-                        <li class="list-group-item flex-fill"><strong>Subject:</strong></li>
-                        <li class="list-group-item flex-fill">Book Subject</li>
-                    </ul>
-                    <ul class="list-group list-group-horizontal">
-                        <li class="list-group-item flex-fill"><strong>Course:</strong></li>
-                        <li class="list-group-item flex-fill">Book Course</li>
-                    </ul>
-                    <ul class="list-group list-group-horizontal">
-                        <li class="list-group-item flex-fill"><strong>ISBN:</strong></li>
-                        <li class="list-group-item flex-fill">8675309</li>
-                    </ul>
-                    <!-- description -->
-                    <div class="card mb-3" id="book-description">
-                        <div class="card-body">
-                            <h5 class="card-title">About the Book:</h5>
-                            <p class="card-text">Description of the book will go here as well as any sort of supporting text about the condition or anything else not mentioned.</p>
-                            <div class="d-grid gap-2 col-6 mx-auto">
-                                <a href="#" class="btn btn-primary">Rent Book</a>
-                            </div>
+{{> format/rightSideOpen}}
+                    <span class="align-middle">
+                        <div class="d-grid gap-2">
+                            <button class="btn btn-primary" type="button">Create Listing</button>
                         </div>
-                    </div>
-                </div>
-        </section>
-    </div>
+                    </span>
+{{> format/rightSideClose}}

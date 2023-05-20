@@ -37,7 +37,8 @@ router.get('/book/:id', async (req, res) => {
 
     res.render('onebook', {
       book,
-      logged_in: req.session.logged_in
+      logged_in: req.session.logged_in,
+      user_first_name: req.session.user_first_name,
     });
   } catch (err) {
     res.status(500).json(err);
@@ -48,7 +49,8 @@ router.get('/book/:id', async (req, res) => {
 router.get('/loaner', async (req, res) => {
   try {
   res.render('newlisting', {
-      logged_in: req.session.logged_in
+      logged_in: req.session.logged_in,
+      user_first_name: req.session.user_first_name,
   });
   } catch (err) {
   res.status(500).json(err);
@@ -59,7 +61,8 @@ router.get('/loaner', async (req, res) => {
 router.get('/search', async (req, res) => {
   try {
   res.render('search', {
-      logged_in: req.session.logged_in
+      logged_in: req.session.logged_in,
+      user_first_name: req.session.user_first_name,
   });
   } catch (err) {
   res.status(500).json(err);
@@ -86,6 +89,17 @@ router.get('/login', (req, res) => {
   }
   // Otherwise, render the 'login' template
   res.render('login');
+});
+
+router.get('/profile', async (req, res) => {
+  try {
+  res.render('profile', {
+      logged_in: req.session.logged_in,
+      user_first_name: req.session.user_first_name,
+  });
+  } catch (err) {
+  res.status(500).json(err);
+  }
 });
 
 module.exports = router;
