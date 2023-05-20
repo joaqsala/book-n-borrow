@@ -10,9 +10,11 @@ router.get('/', async (req, res) => {
       where: {
         available: true,
       },
-      attributes: ['bookName', 'author', 'isbn', 'bookcoverURL', 'yearPublish', 'rentalPrice'],
+      attributes: ['bookName', 'author', 'isbn', 'bookcoverURL', 'yearPublish', 'rentalPrice','id'],
       order: [['bookName', 'ASC']],
+      
     });
+    
 
     // Serialize data so the template can read it
     const books = bookData.map((book) => book.get({ plain: true }));
@@ -29,7 +31,7 @@ router.get('/', async (req, res) => {
 });
 
 //Get a book from the homescreen to display on a card
-router.get('/books/:id', async (req, res) => {
+router.get('/book/:id', async (req, res) => {
   try {
     const bookData = await Book.findByPk(req.params.id, {
       where: {
@@ -108,41 +110,42 @@ router.post('/rent/:id', async (req, res) => {
 
 //route once user is logged in to see what they're renting & have on rent
 // Use withAuth middleware to prevent access to route
-router.get('/profile', withAuth, async (req, res) => {
-  try {
-    // Find the logged in user based on the session ID
-    const userData = await User.findByPk(req.session.user_id, {
-      attributes: { exclude: ['password'] },
-      include: [ 
-        { 
-          model: Book, 
-          attributes: { exclude: ['owner_id'] }
-        },
-      ]
-    });
-    const renterData = await User.findByPk(req.session.user_id, {
-      attributes: [
-        {
-          model: Renter, 
-          attributes: ['book_id'],
-        },
-      ],
-    });
+// router.get('/profile', withAuth, async (req, res) => {
+//   try {
+//     // Find the logged in user based on the session ID
+//     const userData = await User.findByPk(req.session.user_id, {
+//       attributes: { exclude: ['password'] },
+//       include: [ 
+//         { 
+//           model: Book, 
+//           attributes: { exclude: ['owner_id'] }
+//         },
+//       ]
+//     });
+//     const renterData = await User.findByPk(req.session.user_id, {
+//       attributes: [
+//         {
+//           model: Renter, 
+//           attributes: ['book_id'],
+//         },
+//       ],
+//     });
 
-    const user = userData.get({ plain: true });
-    console.log(user)
-    const renter = renterData.get({ plain: true });
-    console.log(renter)
+//     const user = userData.get({ plain: true });
+//     console.log(user)
+//     const renter = renterData.get({ plain: true });
+//     console.log(renter)
 
-    res.render('profile', {
-      ...user,
-      ...renter,
-      logged_in: true
-    });
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
+//     res.render('profile', {
+//       ...user,
+//       ...renter,
+//       logged_in: req.session.logged_in,
+//       user_first_name: req.session.user_first_name,
+//     });
+//   } catch (err) {
+//     res.status(500).json(err);
+//   }
+// });
 
 // Login route
 router.get('/login', (req, res) => {
