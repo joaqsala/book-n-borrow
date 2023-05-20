@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const { User, Book } = require('../models');
+const withAuth = require('../utils/auth');
 
 
  // Get all books
