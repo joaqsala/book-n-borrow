@@ -1,0 +1,74 @@
+<!-- {{!-- main webpage content --}} -->
+{{> format/leftSideOpen}}
+                    <h3>Profile</h3>
+                    <!-- profile info -->
+                    <dl class="row">
+                        <dt class="col-sm-3">Name:</dt>
+                        <dd class="col-sm-9">John Doe</dd>
+                    
+                        <dt class="col-sm-3">Email:</dt>
+                        <dd class="col-sm-9">testemail@gmail.com</dd>
+                    </dl>
+{{> format/leftSideClose}}
+                <!-- {{!-- column right side --}} -->
+{{> format/rightSideOpen}}
+                    <!-- rentals -->
+                    <h3>Rented Books:</h3>
+                    <table class="table table-hover table-bordered">
+                        <thead>
+                            <tr>
+                                <th scope="col">Title</th>
+                                <th scope="col">ISBN</th>
+                                <th scope="col">Price</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">Book 1</th>
+                                <td>123456</td>
+                                <td>$12.99</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Book 2</th>
+                                <td>678910</td>
+                                <td>$69.99</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Book 3</th>
+                                <td>8675309</td>
+                                <td>$96.99</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <!-- listings -->
+                    <h3>Listed Books:</h3>
+                    <table class="table table-hover table-bordered">
+                        <thead>
+                            <tr>
+                                <th scope="col">Title</th>
+                                <th scope="col">ISBN</th>
+                                <th scope="col">Price</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">Book 1</th>
+                                <td>123456</td>
+                                <td>$12.99</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Book 2</th>
+                                <td>678910</td>
+                                <td>$69.99</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Book 3</th>
+                                <td>8675309</td>
+                                <td>$96.99</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+{{> format/rightSideClose}}
