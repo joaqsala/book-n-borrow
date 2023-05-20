@@ -44,6 +44,10 @@ Book.init(
       type: DataTypes.STRING,
       allowNull: true,
     },
+    available: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: true
+    },
     owner_id: {
       type: DataTypes.INTEGER,
       allowNull: false,

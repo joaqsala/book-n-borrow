@@ -1,12 +1,14 @@
 const router = require('express').Router();
-const { User, Book, Renter } = require('../models');
-const withAuth = require('../utils/auth');
+const { User, Book } = require('../models');
 
 
  // Get all books
 router.get('/', async (req, res) => {
   try {
     const bookData = await Book.findAll({
+      where: {
+        available: true,
+      },
       attributes: ['bookName', 'author', 'isbn', 'bookcoverURL', 'yearPublish', 'rentalPrice'],
       order: [['bookName', 'ASC']],
     });
@@ -29,6 +31,9 @@ router.get('/', async (req, res) => {
 router.get('/book/:id', async (req, res) => {
   try {
     const bookData = await Book.findByPk(req.params.id, {
+      where: {
+        available: true,
+      },
       attributes: { exclude: ['owner_id'] },
     });
 
@@ -68,14 +73,14 @@ router.get('/search', async (req, res) => {
 
 // Sign-up route
 router.get('/signup', (req, res) => {
-  // If the user is already logged in, redirect to the homepage
-    if (req.session.logged_in) {
-      res.redirect('/');
-      return;
-    }
-    // Otherwise, render the 'login' template
+  try {
     res.render('signup');
+    
+  } catch (err) {
+    res.status(500).json(err);
+  }
   });
+
 
 // Login route
 router.get('/login', (req, res) => {

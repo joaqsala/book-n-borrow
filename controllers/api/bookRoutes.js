@@ -9,7 +9,10 @@ router.post('/search', async (req, res) => {
         const { fieldName, newInfo } = req.body;
 
         const bookData = await Book.findAll({
-        [fieldName] : newInfo
+            where: {
+                available: true,
+            },
+            [fieldName] : newInfo
     });
         if (!bookData) {
         res.status(404).json({ message: 'There are no books for the given search parameters.' });
