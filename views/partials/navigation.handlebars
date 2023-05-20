@@ -16,7 +16,16 @@
                 <a class="nav-link" href="/">About Us</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/login">Login</a>
+                {{#if logged_in}}
+                <li>
+                    <a class="nav-link" href="/profile">{{user_first_name}}</a> <!-- link to profile page -->
+                </li>
+                <li>
+                    <a class="nav-link" id="logout" href="/">Logout</a> <!-- link to profile page -->
+                </li>        
+                {{else}}
+                    <a class="nav-link" href="/login">Login</a>
+                {{/if}}
             </li>
             </ul>
         </h6>
