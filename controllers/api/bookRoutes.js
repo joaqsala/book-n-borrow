@@ -40,13 +40,22 @@ router.post('/', withAuth, async (req, res) => {
     }
 });
 
- // books user has chosen to rent 
+ // create an entry in Renter table to show renter id and book id
 router.post('/rent', withAuth, async (req, res) => {
     try {
         const rentData = await Renter.create({ 
             book_id: req.params.id,
             renter_id: req.session.user_id,
     });
+    //update the 'available' field in the book table
+    await Book.update({ 
+        available: false 
+    }, 
+    { 
+        where: 
+        { id: req.params.id } 
+    });    
+
         res.status(200).json(rentData);
 
     } catch (err) {

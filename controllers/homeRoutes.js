@@ -28,7 +28,7 @@ router.get('/', async (req, res) => {
 });
 
 //Get a book from the homescreen to display on a card
-router.get('/book/:id', async (req, res) => {
+router.get('/books/:id', async (req, res) => {
   try {
     const bookData = await Book.findByPk(req.params.id, {
       where: {
@@ -40,7 +40,7 @@ router.get('/book/:id', async (req, res) => {
     const book = bookData.get({ plain: true });
     console.log(book)
 
-    res.render('onebook', {
+    res.render('viewbookpage', {
       book,
       logged_in: req.session.logged_in
     });
@@ -81,6 +81,64 @@ router.get('/signup', (req, res) => {
   }
   });
 
+  // book user has chosen to rent 
+router.post('/rent/:id', async (req, res) => {
+  try {
+    const bookData = await Book.findByPk(req.params.id, {
+      where: {
+        available: true,
+      },
+      attributes: { exclude: ['owner_id'] },
+    });
+
+    const book = bookData.get({ plain: true });
+
+    res.render('checkout', {
+      book,
+      logged_in: req.session.logged_in
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+//route once user is logged in to see what they're renting & have on rent
+// Use withAuth middleware to prevent access to route
+router.get('/profile', withAuth, async (req, res) => {
+  try {
+    // Find the logged in user based on the session ID
+    const userData = await User.findByPk(req.session.user_id, {
+      attributes: { exclude: ['password'] },
+      include: [ 
+        { 
+          model: Book, 
+          attributes: { exclude: ['owner_id'] }
+        },
+      ]
+    });
+    const renterData = await User.findByPk(req.session.user_id, {
+      attributes: [
+        {
+          model: Renter, 
+          attributes: ['book_id'],
+        },
+      ],
+    });
+
+    const user = userData.get({ plain: true });
+    console.log(user)
+    const renter = renterData.get({ plain: true });
+    console.log(renter)
+
+    res.render('profile', {
+      ...user,
+      ...renter,
+      logged_in: true
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 
 // Login route
 router.get('/login', (req, res) => {

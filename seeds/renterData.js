@@ -1,13 +1,10 @@
 const { Renter } = require('../models');
 
 const renterdata = [
+
   {
-    book_id: 1,
+    book_id: 5,
     renter_id: 2
-  },
-  {
-    book_id: 2,
-    renter_id: 3
   },
 ];
 
