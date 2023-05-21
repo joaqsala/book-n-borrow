@@ -3,7 +3,7 @@
             <div class="row justify-content-between">
                 <!-- {{!-- column left side --}} -->
                 <div class="col-5">
-                    <h3>Here Are Your Selections:</h3>
+                    <h3>Here is Your Selection:</h3>
                     <table class="table table-hover table-bordered">
                         <thead>
                             <tr>
@@ -15,18 +15,8 @@
                             <tbody>
                             <tr>
                                 <th scope="row">{{book.bookName}}</th>
-                                <td>123456</td>
-                                <td>$12.99</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Book 2</th>
-                                <td>678910</td>
-                                <td>$69.99</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Book 3</th>
-                                <td>8675309</td>
-                                <td>$96.99</td>
+                                <td>{{book.isbn}}</td>
+                                <td>${{book.rentalPrice}}</td>
                             </tr>
                             </tbody>
                         </table>
@@ -34,7 +24,7 @@
                 <!-- {{!-- column right side --}} -->
                 <div class="col-5">
                     <div class="d-grid gap-2 col-6 mx-auto">
-                        <button class="btn btn-primary" type="button">Continue Browsing</button>
+                        <a class="btn btn-primary" href="/" type="button">Continue Browsing</a>
                         <button class="btn btn-success checkout-button" data-book-id="{{book.id}}" type="button">Checkout <i class="fa-solid fa-cart-shopping"></i></button>
                     </div>
                 </div>
