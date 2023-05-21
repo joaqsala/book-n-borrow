@@ -12,6 +12,7 @@ User.hasMany(Book, {
 Book.belongsTo(User, {
     foreignKey: 'owner_id',
     as: 'owner',
+    onDelete: 'CASCADE',
 });
 
 // Rental
@@ -33,6 +34,7 @@ Book.hasOne(Renter, {
 Renter.belongsTo(Book, {
     foreignKey: 'book_id',
     as: 'book',
+    onDelete: 'CASCADE',
 });
 
 module.exports = { User, Book, Renter }
