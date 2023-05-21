@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const { User, Book, Renter } = require('../../models');
 const withAuth = require('../../utils/auth');
+const fetch = require('node-fetch');
 
 
  // Get books using the field name (chosen by user in dropdown) and value 
@@ -30,10 +31,21 @@ router.post('/search', async (req, res) => {
 router.post('/', async (req, res) => {
     try {
         console.log("test1 :",req.session.user_id)
-    const newBook = await Book.create({
-        ...req.body,
-        owner_id: req.session.user_id,
-    });
+    const { isbn, ...bookData } = req.body;
+
+        // Make API call to retrieve book cover image URL
+        const apiUrl = `https://api.bookcover.longitood.com/bookcover/${isbn}`;
+
+        const apiResponse = await fetch(apiUrl);
+        const { url: bookcoverURL } = await apiResponse.json();
+
+        const newBook = await Book.create({
+            ...bookData,
+            owner_id: req.session.user_id,
+            isbn: req.body.isbn,
+            bookcoverURL: bookcoverURL,
+        });
+
 
     res.status(200).json(newBook);
     } catch (err) {
