@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { User, Book } = require('../models');
+const { User, Renter, Book } = require('../models');
 const withAuth = require('../utils/auth');
 
 
@@ -184,15 +184,43 @@ router.get('/login', (req, res) => {
   res.render('login');
 });
 
+
 router.get('/profile', async (req, res) => {
   try {
-  res.render('profile', {
-      logged_in: req.session.logged_in,
-      user_first_name: req.session.user_first_name,
-  });
+    const userData = await User.findOne({ 
+      where: { id: req.session.user_id }, 
+      include: [
+        {
+          model: Renter,
+          as: 'rentedBooks',
+          include: [
+            {
+              model: Book,
+              as: 'book',
+              attributes: ['id','bookName', 'isbn', 'rentalPrice'] // add the fields that you want to display
+            },
+          ],
+        },
+      ]
+    });
+
+    const user = userData.get({ plain: true });
+    
+    // Log the user data to check if it includes the book details
+    console.log(user);
+
+    res.render('profile', {
+      ...user,
+      logged_in: req.session.logged_in
+    });
   } catch (err) {
-  res.status(500).json(err);
+    res.status(500).json(err);
   }
 });
+
+
+
+
+
 
 module.exports = router;

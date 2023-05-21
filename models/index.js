@@ -2,26 +2,37 @@ const User = require('./User');
 const Book = require('./Book');
 const Renter = require('./Renter');
 
-//ownership
+// Ownership
 User.hasMany(Book, {
-    foreignKey: 'user_id',
+    foreignKey: 'owner_id',
+    as: 'ownedBooks',
     onDelete: 'CASCADE',
-    });
+});
 
 Book.belongsTo(User, {
-    foreignKey: 'user_id',
-    });
+    foreignKey: 'owner_id',
+    as: 'owner',
+});
 
-//rental
-User.belongsToMany(Book, {
-    through: Renter, 
+// Rental
+User.hasMany(Renter, {
     foreignKey: 'renter_id',
-    });
+    as: 'rentedBooks',
+});
 
-Book.belongsTo(User, {
-    through: Renter,
+Renter.belongsTo(User, {
+    foreignKey: 'renter_id',
+    as: 'renter',
+});
+
+Book.hasOne(Renter, {
     foreignKey: 'book_id',
-    });
+    as: 'renterInfo',
+});
 
+Renter.belongsTo(Book, {
+    foreignKey: 'book_id',
+    as: 'book',
+});
 
 module.exports = { User, Book, Renter }

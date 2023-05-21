@@ -1,5 +1,24 @@
 const router = require('express').Router();
 const { User } = require('../../models');
+const { Renter, Book } = require('../../models');
+
+router.get('/:id/books', async (req, res) => {
+  try {
+    const rentedBooks = await Renter.findAll({
+      where: {
+        renter_id: req.params.id
+      },
+      include: [{
+        model: Book,
+        as: 'book'
+      }]
+    });
+
+    res.status(200).json(rentedBooks);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 
 //creates a new user profile
 router.post('/', async (req, res) => {

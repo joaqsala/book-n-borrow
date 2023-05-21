@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Book, Renter } = require('../../models');
+const { User, Book, Renter } = require('../../models');
 const withAuth = require('../../utils/auth');
 
 
@@ -63,6 +63,38 @@ router.post('/checkedOut/:id', withAuth, async (req, res) => {
         res.status(500).json(err);
     }
 });
+
+router.put('/return/:rentalId', async (req, res) => {
+    try {
+        console.log(req.params.rentalId);  // Debugging line
+
+        // Fetch rental
+        const rental = await Renter.findByPk(req.params.rentalId);
+        console.log(rental);  // Debugging line
+
+        if (!rental) {
+            return res.status(404).json({ message: 'Rental not found' });
+        }
+
+        // Check if book exists
+        const book = await Book.findByPk(rental.book_id);
+        console.log(book);  // Debugging line
+
+        if (!book) {
+            return res.status(404).json({ message: 'Book not found' });
+        }
+
+        // If the book and rental exist, we return the book
+        await book.update({ available: true });
+        await rental.destroy();
+    
+        return res.status(200).json({ message: 'Book returned successfully' });
+    } catch (err) {
+        console.log(err);  // Debugging line
+        res.status(500).json({ message: 'Failed to return book' });
+    }
+});
+    
 
 
 module.exports = router;
