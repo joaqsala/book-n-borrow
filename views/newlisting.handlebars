@@ -1,13 +1,16 @@
 <!-- {{!-- main webpage content --}} -->
 {{> format/leftSideOpen}}
                     <h3>Create New Listing:</h3>
+                    <form id="new-listing-form" action="">
 {{> forms/newListingForm}}
 {{> format/leftSideClose}}
                 <!-- {{!-- column right side --}} -->
 {{> format/rightSideOpen}}
                     <span class="align-middle">
                         <div class="d-grid gap-2">
-                            <button class="btn btn-primary" type="button">Create Listing</button>
+                            <button type="submit" class="btn btn-primary" type="button">Create Listing</button>
                         </div>
                     </span>
+                    </form>
 {{> format/rightSideClose}}
+{{> scripts/newListingScript}}
