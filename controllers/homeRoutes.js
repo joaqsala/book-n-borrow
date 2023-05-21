@@ -142,6 +142,13 @@ router.get('/profile', async (req, res) => {
             },
           ],
         },
+        {
+          model: Book,
+          as: 'ownedBooks',
+          where: { owner_id: req.session.user_id },
+          attributes: ['id','bookName', 'isbn', 'rentalPrice'], // add the fields that you want to display
+          required: false
+        },
       ]
     });
 
@@ -158,6 +165,7 @@ router.get('/profile', async (req, res) => {
     res.status(500).json(err);
   }
 });
+
 
 
 
