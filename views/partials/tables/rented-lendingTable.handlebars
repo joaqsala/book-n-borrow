@@ -1,4 +1,5 @@
 <table class="table table-hover table-bordered">
+                        <h3>Rented Books:</h3>
                         <thead>
                             <tr>
                                 <th scope="col">Title</th>
@@ -31,36 +32,19 @@
                                 <th scope="col">Remove</th>
                             </tr>
                         </thead>
+                        <h3>Owned Books:</h3>
                         <tbody>
+                            {{#each ownedBooks}}
                             <tr>
-                                <th scope="row">Book 1</th>
-                                <td>123456</td>
-                                <td>$12.99</td>
+                                <th scope="row">{{bookName}}</th>
+                                <td>{{isbn}}</td>
+                                <td>${{rentalPrice}}</td>
                                 <td>
                                     <div class="d-grid col-8 mx-auto">
                                         <button class="btn btn-danger" type="button"><i class="fa-solid fa-trash"></i></button>
                                     </div>
                                 </td>
                             </tr>
-                            <tr>
-                                <th scope="row">Book 2</th>
-                                <td>678910</td>
-                                <td>$69.99</td>
-                                <td>
-                                    <div class="d-grid col-8 mx-auto">
-                                        <button class="btn btn-danger" type="button"><i class="fa-solid fa-trash"></i></button>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Book 3</th>
-                                <td>8675309</td>
-                                <td>$96.99</td>
-                                <td>
-                                    <div class="d-grid col-8 mx-auto">
-                                        <button class="btn btn-danger" type="button"><i class="fa-solid fa-trash"></i></button>
-                                    </div>
-                                </td>
-                            </tr>
+                            {{/each}}
                         </tbody>
                     </table>
