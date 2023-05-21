@@ -2,6 +2,8 @@
     float: left;
     padding: 1em;
     width: 100%;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: x-large;
 }
 
 .signup-section{
@@ -34,6 +36,15 @@ body {
     background-image: url("https://images.unsplash.com/photo-1457369804613-52c61a468e7d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80") !important;
     backdrop-filter: blur(2px);
     -webkit-backdrop-filter: blur(2px); /* For Safari */
+
+}
+
+.booknborrow {
+    text-decoration: none;
+    align-items: center;
+    font-size: 50px;
+    color: black;
+    font-family: 'Cormorant Garamond', serif;
 }
 
 .signup-section{
