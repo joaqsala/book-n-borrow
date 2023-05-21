@@ -26,9 +26,10 @@ router.post('/search', async (req, res) => {
     }
 });
 
-//adds a new book to db
-router.post('/', withAuth, async (req, res) => {
+//adds a new book to db (add withAuth after testing)
+router.post('/', async (req, res) => {
     try {
+        console.log("test1 :",req.session.user_id)
     const newBook = await Book.create({
         ...req.body,
         owner_id: req.session.user_id,
@@ -36,6 +37,7 @@ router.post('/', withAuth, async (req, res) => {
 
     res.status(200).json(newBook);
     } catch (err) {
+        console.log(err)
     res.status(400).json(err);
     }
 });
