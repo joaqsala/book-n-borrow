@@ -31,20 +31,19 @@ router.get('/', async (req, res) => {
 });
 
 //Get a book from the homescreen to display on a card
+//Get a book from the homescreen to display on a card
 router.get('/book/:id', async (req, res) => {
   try {
     const bookData = await Book.findByPk(req.params.id, {
-      where: {
-        available: true,
-      },
-      attributes: { exclude: ['owner_id'] },
+      attributes: ['bookName', 'author', 'isbn', 'bookcoverURL', 'yearPublish', 'rentalPrice','id'],
     });
 
     const book = bookData.get({ plain: true });
-    console.log(book)
+    console.log(book) // check if 'id' is logged here
 
+    
     res.render('viewbookpage', {
-      book,
+      book, // the 'id' should be passed along with the rest of the book data here
       logged_in: req.session.logged_in,
       user_first_name: req.session.user_first_name,
     });
@@ -52,6 +51,7 @@ router.get('/book/:id', async (req, res) => {
     res.status(500).json(err);
   }
 });
+
 
 //Send user to posting page
 router.get('/loaner', async (req, res) => {
@@ -87,26 +87,52 @@ router.get('/signup', (req, res) => {
   }
   });
 
+  router.get('/book/:id/checkout', async (req, res) => {
+    try {
+      // Retrieve the book data from the database
+      const bookData = await Book.findByPk(req.params.id, {
+        attributes: { exclude: ['owner_id'] },
+      });
+  
+      if (!bookData) {
+        res.status(404).json({ message: 'No book found with this id!' });
+        return;
+      }
+  
+      const book = bookData.get({ plain: true });
+      console.log(book);
+  
+      // Pass the book data to the checkout template
+      res.render('checkout', {
+        book,
+        logged_in: req.session.logged_in,
+        user_first_name: req.session.user_first_name,
+      });
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  });
+
   // book user has chosen to rent 
-router.post('/rent/:id', async (req, res) => {
-  try {
-    const bookData = await Book.findByPk(req.params.id, {
-      where: {
-        available: true,
-      },
-      attributes: { exclude: ['owner_id'] },
-    });
+// router.get('/rent/:id', async (req, res) => {
+//   try {
+//     const bookData = await Book.findByPk(req.params.id, {
+//       where: {
+//         available: true,
+//       },
+//       attributes: { exclude: ['owner_id'] },
+//     });
 
-    const book = bookData.get({ plain: true });
+//     const book = bookData.get({ plain: true });
 
-    res.render('checkout', {
-      book,
-      logged_in: req.session.logged_in
-    });
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
+//     res.render('checkout', {
+//       book,
+//       logged_in: req.session.logged_in
+//     });
+//   } catch (err) {
+//     res.status(500).json(err);
+//   }
+// });
 
 //route once user is logged in to see what they're renting & have on rent
 // Use withAuth middleware to prevent access to route

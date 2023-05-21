@@ -7,14 +7,14 @@
                     <table class="table table-hover table-bordered">
                         <thead>
                             <tr>
-                                <th scope="col">Title</th>
+                                <th scope="col">Title:</th>
                                 <th scope="col">ISBN</th>
                                 <th scope="col">Price</th>
                             </tr>
                             </thead>
                             <tbody>
                             <tr>
-                                <th scope="row">Book 1</th>
+                                <th scope="row">{{book.bookName}}</th>
                                 <td>123456</td>
                                 <td>$12.99</td>
                             </tr>
@@ -35,9 +35,10 @@
                 <div class="col-5">
                     <div class="d-grid gap-2 col-6 mx-auto">
                         <button class="btn btn-primary" type="button">Continue Browsing</button>
-                        <button class="btn btn-success" type="button">Checkout <i class="fa-solid fa-cart-shopping"></i></button>
+                        <button class="btn btn-success checkout-button" data-book-id="{{book.id}}" type="button">Checkout <i class="fa-solid fa-cart-shopping"></i></button>
                     </div>
                 </div>
             </div>
         </section>
     </div>
+    {{> scripts/checkoutscript}}
