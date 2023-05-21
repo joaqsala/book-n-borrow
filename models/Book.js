@@ -27,7 +27,6 @@ Book.init(
     isbn: {
       type: DataTypes.STRING(17),
       allowNull: false,
-      unique: true,
     },
     rentalPrice: {
       type: DataTypes.DECIMAL(10, 2),
