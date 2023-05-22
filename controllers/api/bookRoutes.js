@@ -5,27 +5,41 @@ const fetch = require('node-fetch');
 
 
  // Get books using the field name (chosen by user in dropdown) and value 
-router.post('/search', async (req, res) => {
-    try {
-        const { fieldName, newInfo } = req.body;
+// bookRoutes.js
 
+router.get('/api/search', async (req, res) => {
+    try {
+        const filter = req.query.filter;
+        const query = req.query.query;
+
+        // handle filter not being one of the options
+        if (!['isbn', 'subject', 'bookName', 'course'].includes(filter)) {
+            res.status(400).json({ message: 'Invalid filter.' });
+            return;
+        }
+
+        // search for books
         const bookData = await Book.findAll({
             where: {
                 available: true,
-            },
-            [fieldName] : newInfo
-    });
+                [filter]: query,
+            }
+        });
+
         if (!bookData) {
-        res.status(404).json({ message: 'There are no books for the given search parameters.' });
-        return;
+            res.status(404).json({ message: 'No books found with the given parameters.' });
+            return;
         }
-        
+
         res.status(200).json(bookData);
 
     } catch (err) {
-    res.status(500).json(err);
+        res.status(500).json(err);
     }
 });
+
+
+    
 
 //adds a new book to db (add withAuth after testing)
 router.post('/', async (req, res) => {
