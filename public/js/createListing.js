@@ -13,7 +13,7 @@ document.querySelector('#new-listing-form').addEventListener('submit', async (ev
         const response = await fetch('/api/books', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ bookName, author, yearPublished, rentalPrice, isbn, subject, course })
+        body: JSON.stringify({ bookName, author, yearPublish, rentalPrice, isbn, subject, course })
         });
     
         if (response.ok) {
