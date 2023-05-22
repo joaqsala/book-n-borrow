@@ -4,7 +4,7 @@
   "description": "Airbnb for books",
   "main": "server.js",
   "scripts": {
-    "seed": "node seeds/index.js", 
+    "seed": "node seeds/index.js",
     "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

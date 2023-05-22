@@ -3,7 +3,7 @@ document.querySelector('#new-listing-form').addEventListener('submit', async (ev
     
         const bookName = document.querySelector('#title').value.trim();
         const author = document.querySelector('#author').value.trim();
-        const yearPublished = document.querySelector('#year').value.trim();
+        const yearPublish = document.querySelector('#year').value.trim();
         const rentalPrice = parseFloat(document.querySelector('#price').value.trim());
         const isbn = document.querySelector('#isbn').value.trim();
         const subject = document.querySelector('#subject').value.trim();
