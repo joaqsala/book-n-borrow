@@ -3,7 +3,7 @@
     padding: 1em;
     width: 100%;
     font-family: 'Cormorant Garamond', serif;
-    font-size: x-large;
+    font-size: large;
 }
 
 .signup-section{
@@ -56,10 +56,18 @@ body {
 }
 
 .listing-section-wrapper{
-    transform: translateX(50px);
     display: flex;
     flex-direction: column;
-    width: 500px;
+    width: auto;
+    
+}
+
+#bookcoverURLimg {
+    height: 250px;
+}
+
+#aboutus-bookshelf {
+    border-radius: .25rem;
 }
 
 .listing-section::-webkit-scrollbar {
@@ -81,7 +89,7 @@ body {
     flex-direction: row;
     flex-wrap: wrap;
     height: 800px;
-    width: 150%;
+    width: auto;
     justify-content: space-between;
     background-color: rgba(128, 128, 128, 0.484);
     overflow-y: auto;
@@ -112,6 +120,8 @@ body {
 .renter-text {
     transform: translate(y = 5px);
 }
+
+
 
 /*** OPEN BOOK ***/
 .open-book {

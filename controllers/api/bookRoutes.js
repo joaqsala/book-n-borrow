@@ -4,28 +4,7 @@ const withAuth = require('../../utils/auth');
 const fetch = require('node-fetch');
 
 
- // Get books using the field name (chosen by user in dropdown) and value 
-router.post('/search', async (req, res) => {
-    try {
-        const { fieldName, newInfo } = req.body;
 
-        const bookData = await Book.findAll({
-            where: {
-                available: true,
-            },
-            [fieldName] : newInfo
-    });
-        if (!bookData) {
-        res.status(404).json({ message: 'There are no books for the given search parameters.' });
-        return;
-        }
-        
-        res.status(200).json(bookData);
-
-    } catch (err) {
-    res.status(500).json(err);
-    }
-});
 
 //adds a new book to db (add withAuth after testing)
 router.post('/', async (req, res) => {

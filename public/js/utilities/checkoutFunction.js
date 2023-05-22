@@ -16,6 +16,7 @@ document.addEventListener('DOMContentLoaded', function() {
             .then(data => {
                 if (data) {
                     alert("Book checked out successfully!");
+                    document.location.replace('/');
                     // Here you could also redirect to a different page or update the page view
                     // For example:
                     // window.location.href = '/some-other-page';
