@@ -4,7 +4,7 @@
                 <div class="col-6">
                     <!-- book image -->
                     <div class="text-center">
-                        <img src="{{book.bookcoverURL}}" class="rounded" alt="book posting image here">
+                        <img src="{{book.bookcoverURL}}" class="rounded" alt="book posting image" id="bookcoverURLimg">
                     </div>
                 </div>
                 <!-- {{!-- column right side --}} -->
@@ -29,8 +29,8 @@
                     <!-- description -->
                     <div class="card mb-3" id="book-description">
                         <div class="card-body">
-                            <h5 class="card-title">About the Book:</h5>
-                            <p class="card-text">Description of the book will go here as well as any sort of supporting text about the condition or anything else not mentioned.</p>
+                            {{!-- <h5 class="card-title">About the Book:</h5>
+                            <p class="card-text">Description of the book will go here as well as any sort of supporting text about the condition or anything else not mentioned.</p> --}}
                             <div class="d-grid gap-2 col-6 mx-auto">
                                 <a href="/book/{{book.id}}/checkout" class="btn btn-primary">Rent Book</a>
                             </div>

@@ -53,7 +53,7 @@ router.get('/book/:id', async (req, res) => {
 
 
 //Send user to posting page
-router.get('/loaner', async (req, res) => {
+router.get('/loaner', withAuth, async (req, res) => {
   try {
   res.render('newlisting', {
       logged_in: req.session.logged_in,
