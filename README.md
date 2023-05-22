@@ -41,6 +41,7 @@ THEN my account credentials be stored in a server database
 * w3slley Bookcover API
 * JavaScript
 * CSS
+* Node.js
 * Handlebars.js
 * Sequelize
 * MySQL
