@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
         const query = document.querySelector('#searchbar').value;
 
         // Perform a POST request to the search route
-        fetch('/api/books/search', {
+        fetch('/api/search', {
             method: 'POST',
             body: JSON.stringify({ filter, query }),
             headers: { 'Content-Type': 'application/json' }

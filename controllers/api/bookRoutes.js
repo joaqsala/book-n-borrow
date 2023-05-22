@@ -2,65 +2,9 @@ const router = require('express').Router();
 const { User, Book, Renter } = require('../../models');
 const withAuth = require('../../utils/auth');
 const fetch = require('node-fetch');
-const exphbs = require('express-handlebars');
-const helpers = require('../../utils/helpers');
-
-
- // Get books using the field name (chosen by user in dropdown) and value 
-// bookRoutes.js
-
-
-const { Op } = require("sequelize");
-const hbs = exphbs.create({ helpers });
-
-router.post('/search', async (req, res) => {
-    try {
-        const filter = req.body.filter;
-        const query = req.body.query;
-
-        if (!['isbn', 'subject', 'bookName', 'course'].includes(filter)) {
-            res.status(400).json({ message: 'Invalid filter.' });
-            return;
-        }
-
-        let searchObject = {
-            available: true
-        };
-
-        if(filter === 'bookName') {
-            searchObject[filter] = {
-                [Op.like]: `%${query}%`
-            };
-        } else {
-            searchObject[filter] = query;
-        }
-
-        const bookData = await Book.findAll({
-            where: searchObject,
-            raw: true
-        });
-
-        if (!bookData) {
-            res.status(404).json({ message: 'No books found with the given parameters.' });
-            return;
-        }
-
-        const books = Array.isArray(bookData) ? bookData : [bookData];
-        hbs.render('views/partials/cards/listingCard.handlebars', { books }).then(renderedHtml => {
-            res.send(renderedHtml);
-        });
-
-    } catch (err) {
-        res.status(500).send('Server error');
-    }
-});
 
 
 
-
-
-
-    
 
 //adds a new book to db (add withAuth after testing)
 router.post('/', async (req, res) => {
