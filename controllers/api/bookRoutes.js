@@ -2,28 +2,42 @@ const router = require('express').Router();
 const { User, Book, Renter } = require('../../models');
 const withAuth = require('../../utils/auth');
 const fetch = require('node-fetch');
+const exphbs = require('express-handlebars');
+const helpers = require('../../utils/helpers');
 
 
  // Get books using the field name (chosen by user in dropdown) and value 
 // bookRoutes.js
 
-router.get('/api/search', async (req, res) => {
-    try {
-        const filter = req.query.filter;
-        const query = req.query.query;
 
-        // handle filter not being one of the options
+const { Op } = require("sequelize");
+const hbs = exphbs.create({ helpers });
+
+router.post('/search', async (req, res) => {
+    try {
+        const filter = req.body.filter;
+        const query = req.body.query;
+
         if (!['isbn', 'subject', 'bookName', 'course'].includes(filter)) {
             res.status(400).json({ message: 'Invalid filter.' });
             return;
         }
 
-        // search for books
+        let searchObject = {
+            available: true
+        };
+
+        if(filter === 'bookName') {
+            searchObject[filter] = {
+                [Op.like]: `%${query}%`
+            };
+        } else {
+            searchObject[filter] = query;
+        }
+
         const bookData = await Book.findAll({
-            where: {
-                available: true,
-                [filter]: query,
-            }
+            where: searchObject,
+            raw: true
         });
 
         if (!bookData) {
@@ -31,12 +45,19 @@ router.get('/api/search', async (req, res) => {
             return;
         }
 
-        res.status(200).json(bookData);
+        const books = Array.isArray(bookData) ? bookData : [bookData];
+        hbs.render('views/partials/cards/listingCard.handlebars', { books }).then(renderedHtml => {
+            res.send(renderedHtml);
+        });
 
     } catch (err) {
-        res.status(500).json(err);
+        res.status(500).send('Server error');
     }
 });
+
+
+
+
 
 
     

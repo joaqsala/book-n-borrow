@@ -6,6 +6,6 @@ const bookRoutes = require('./api/bookRoutes');  // Updated this line
 
 router.use('/', homeRoutes);
 router.use('/api', apiRoutes);
-router.use('/api/book', bookRoutes);
+// router.use('/api/book', bookRoutes);
 
 module.exports = router;

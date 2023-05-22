@@ -1,7 +1,7 @@
-<!-- {{!-- main webpage content --}} -->
+<!-- main webpage content -->
 {{> format/leftSideOpen}}
 <!-- Search bar -->
-<form id="search-form" action="/books/search" method="POST">
+<form id="search-form">
     <div class="col-8 searchbar">
         <div class="input-group mb-4 ">
             <input type="text" name="query"  class="form-control" id="searchbar" placeholder="Search Input" />
@@ -11,7 +11,7 @@
     <!-- filters -->
     <h3>Search Filters:</h3>
     <div class="form-check">
-        <input class="form-check-input" type="radio" name="filter" value="isbn" id="isbn-filter" />
+        <input class="form-check-input" type="radio" name="filter" value="isbn" id="isbn-filter" checked />
         <label class="form-check-label" for="isbn-filter"> ISBN Search </label>
     </div>
     <div class="form-check">
@@ -19,7 +19,7 @@
         <label class="form-check-label" for="subject-filter"> Subject </label>
     </div>
     <div class="form-check">
-        <input class="form-check-input" type="radio" name="filter" value="title" id="title-filter" />
+        <input class="form-check-input" type="radio" name="filter" value="bookName" id="title-filter" />
         <label class="form-check-label" for="title-filter"> Title </label>
     </div>
     <div class="form-check">
@@ -28,11 +28,17 @@
     </div>
 </form>
 {{> format/leftSideClose}}
-    <!-- {{!-- column right side --}} -->
+<!-- column right side -->
 {{> format/rightSideOpen}}
-{{> listingSection}}
+    <div class="listing-section-wrapper">
+        <h3 id="listings">Listings:</h3>
+        <div class="listing-section p-3 rounded" id="listing-section">
+            {{#each books}}
+                {{> partials/cards/listingCard this}}
+            {{/each}}
+        </div>
 
+        </div>
 {{> format/rightSideClose}}
 {{> scripts/searchPageScript}}
 {{> scripts/searchScript}}
-
