@@ -1,5 +1,5 @@
 # Project 2: Book'n Borrow
-Book'n Borrow is a website designed to give users the option to loan out old college textbooks that they are no longer using and to make money by loaning the book. It also allows a user to be able to search for and 
+Book'n Borrow is a website designed to give users the option to loan out old college textbooks that they are no longer using and to make money by loaning the book. It also allows a user to be able to search for and be able to rent out textbooks that they may need for their courses.
 
 ## Description
 
@@ -39,9 +39,27 @@ THEN my account credentials be stored in a server database
 * Google Fonts
 * Bootstrap
 * w3slley Bookcover API
+* JavaScript
+* CSS
+* Handlebars.js
+* Sequelize
+* MySQL
+* Jira
+* Figma
+* GitHub
+* Heroku
 
 ## Screenshot of Deployed Application
+<img src="./screenshots/homepage.png" style="width: 800px">
+<img src="./screenshots/search.png" style="width: 800px">
+<img src="./screenshots/newlisting.png" style="width: 800px">
+<img src="./screenshots/login.png" style="width: 800px">
+<img src="./screenshots/bookabout.png" style="width: 800px">
+<img src="./screenshots/profile.png" style="width: 800px">
+<img src="./screenshots/checkout.png" style="width: 800px">
+
 
 ## Link to Deployed Application
+https://booknborrow.herokuapp.com/
 
 ---
