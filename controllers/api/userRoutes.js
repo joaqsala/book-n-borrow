@@ -6,12 +6,14 @@ router.get('/:id/books', async (req, res) => {
   try {
     const rentedBooks = await Renter.findAll({
       where: {
-        renter_id: req.params.id
+        renter_id: req.params.id,
       },
-      include: [{
-        model: Book,
-        as: 'book'
-      }]
+      include: [
+        {
+          model: Book,
+          as: 'book',
+        },
+      ],
     });
 
     res.status(200).json(rentedBooks);
@@ -62,10 +64,9 @@ router.post('/login', async (req, res) => {
       req.session.user_id = userData.id;
       req.session.user_first_name = userData.firstName;
       req.session.logged_in = true;
-      
+
       res.json({ user: userData, message: 'You are now logged in!' });
     });
-
   } catch (err) {
     res.status(400).json(err);
   }

@@ -1,7 +1,6 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
-
 class Book extends Model {}
 
 Book.init(
@@ -46,7 +45,7 @@ Book.init(
     },
     available: {
       type: DataTypes.BOOLEAN,
-      defaultValue: true
+      defaultValue: true,
     },
     owner_id: {
       type: DataTypes.INTEGER,
@@ -65,7 +64,5 @@ Book.init(
     modelName: 'book',
   }
 );
-
-
 
 module.exports = Book;
