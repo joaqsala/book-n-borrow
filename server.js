@@ -12,14 +12,14 @@ const SequelizeStore = require('connect-session-sequelize')(session.Store);
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-const hbs = expressHandlebars.create({ 
+const hbs = expressHandlebars.create({
   helpers,
   handlebars: Handlebars.create({
     runtimeOptions: {
       allowProtoPropertiesByDefault: true,
-      allowProtoMethodsByDefault: true
-    }
-  })
+      allowProtoMethodsByDefault: true,
+    },
+  }),
 });
 
 const sess = {
@@ -28,8 +28,8 @@ const sess = {
   resave: false,
   saveUninitialized: true,
   store: new SequelizeStore({
-    db: sequelize
-  })
+    db: sequelize,
+  }),
 };
 
 app.use(session(sess)); //usage of middleware token
