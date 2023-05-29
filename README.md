@@ -42,6 +42,7 @@ THEN my account credentials be stored in a server database
 * JavaScript
 * CSS
 * Node.js
+* Express.js
 * Handlebars.js
 * Sequelize
 * MySQL
